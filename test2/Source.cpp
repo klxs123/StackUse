@@ -9,19 +9,15 @@ const int ALLOC_STEP = 100;
 void push_stack(StackPtr* ptr, const char data)
 {
 	assert(ptr != 0);
-	//考虑空队列
 	if (*ptr == 0)
 	{
 		*ptr = (StackPtr)calloc(1, sizeof(Stack));
 	}
-	//考虑队列内部数据空间不足时扩容
 	if ((*ptr)->size + 1 > (*ptr)->capacity)
 	{
-		//给数据成员分配空间
 		(*ptr)->data = (char*)realloc((*ptr)->data, (*ptr)->capacity + ALLOC_STEP);
 		(*ptr)->capacity = (*ptr)->capacity + ALLOC_STEP;
 	}
-	//给队列内部数据按索引赋值(尾部)
 	(*ptr)->data[(*ptr)->size] = data;
 	(*ptr)->size += 1;
 }
