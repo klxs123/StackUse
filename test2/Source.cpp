@@ -24,31 +24,26 @@ void push_stack(StackPtr* ptr, const char data)
 	//给队列内部数据按索引赋值(尾部)
 	(*ptr)->data[(*ptr)->size] = data;
 	(*ptr)->size += 1;
-
 }
 char pop_stack(StackPtr* ptr)
 {
 	assert(ptr != 0 && (*ptr) != 0 && (*ptr)->size != 0);
 
-	int account = (*ptr)->size - 1;
-	char ret = (*ptr)->data[account];
-	(*ptr)->data[account] = '\0';
-	//char* pdata = (char*)malloc((*ptr)->capacity);
-	//memcpy(pdata, (*ptr)->data, (*ptr)->size - 1);
-	//free((*ptr)->data);
-	//(*ptr)->data = pdata;
-	//memmove((*ptr)->data, (*ptr)->data + 1, (*ptr)->size - 1);
+	//int account = (*ptr)->size - 1;
+	char ret = (*ptr)->data[(*ptr)->size-1];
+	//(*ptr)->data[account] = '\0';
+	char* pdata = (char*)malloc((*ptr)->capacity);
+	memcpy(pdata, (*ptr)->data , (*ptr)->size - 1);
+	free((*ptr)->data);
+	(*ptr)->data = pdata;
 	(*ptr)->size -= 1;
-
 	return ret;
 }
-
 bool stack_empty(StackPtr queue)
 {
 	assert(queue != 0);
 	return queue->size == 0;
 }
-
 void stack_foreach(StackPtr queue, LITE_FUNC func)
 {
 	assert(queue);
