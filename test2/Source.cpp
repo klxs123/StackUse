@@ -28,21 +28,20 @@ char pop_stack(StackPtr* ptr)
 	int account = (*ptr)->size - 1;
 	char ret = (*ptr)->data[account];
 	(*ptr)->data[account] = '\0';
-
 	(*ptr)->size -= 1;
 	return ret;
 }
-bool stack_empty(StackPtr queue)
+bool stack_empty(StackPtr stackPtr)
 {
-	assert(queue != 0);
-	return queue->size == 0;
+	assert(stackPtr != 0);
+	return stackPtr->size == 0;
 }
-void stack_foreach(StackPtr queue, LITE_FUNC func)
+void stack_foreach(StackPtr stack, LITE_FUNC func)
 {
-	assert(queue);
-	for (int i = 0; i < queue->size; i++)
+	assert(stack);
+	for (int i = 0; i < stack->size; i++)
 	{
-		func(queue->data[i]);
+		func(stack->data[i]);
 	}
 }
 void instructions(void);
@@ -53,7 +52,7 @@ void printElement(char data)
 }
 int main()
 {
-	StackPtr pQueue = 0;
+	StackPtr pStack = 0;
 
 	char item;
 
@@ -72,15 +71,15 @@ int main()
 		{
 			printf("Enter a character: ");
 			scanf("\n%c", &item);
-			push_stack(&pQueue, item);
+			push_stack(&pStack, item);
 		}
 		break;
 		case 2:
 		{
-			if (!stack_empty(pQueue))
+			if (!stack_empty(pStack))
 			{
-				item = pop_stack(&pQueue);
-				printf("\'%c\' has been dequeued.\n", item);
+				item = pop_stack(&pStack);
+				printf("\'%c\' has been destack.\n", item);
 			}
 
 		}
@@ -88,8 +87,8 @@ int main()
 
 		case 3:
 		{
-			printf("queue elements:\n");
-			stack_foreach(pQueue, printElement);
+			printf("Stack elements:\n");
+			stack_foreach(pStack, printElement);
 			printf("\n");
 		}
 		break;
