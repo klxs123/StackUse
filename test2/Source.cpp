@@ -30,8 +30,9 @@ char pop_stack(StackPtr* ptr)
 	assert(ptr != 0 && (*ptr) != 0 && (*ptr)->size != 0);
 
 	//int account = (*ptr)->size - 1;
-	char ret = (*ptr)->data[(*ptr)->size-1];
+	
 	//(*ptr)->data[account] = '\0';
+	char ret = (*ptr)->data[(*ptr)->size - 1];
 	char* pdata = (char*)malloc((*ptr)->capacity);
 	memcpy(pdata, (*ptr)->data , (*ptr)->size - 1);
 	free((*ptr)->data);
